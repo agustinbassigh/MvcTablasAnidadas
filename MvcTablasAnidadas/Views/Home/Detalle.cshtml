@@ -1,0 +1,23 @@
+﻿@model List<MvcTablasAnidadas.Models.Order_Details>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>          
+            <th>ProductName</th>
+            <th>Quantity</th>
+            <th>UnitPrice</th>
+            <th>Discount</th>           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>               
+                <td>@item.Products.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice</td>
+                <td>@item.Discount</td>               
+            </tr>
+        }
+    </tbody>
+</table>

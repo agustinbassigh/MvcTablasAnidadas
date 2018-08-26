@@ -1,0 +1,58 @@
+﻿@model List<MvcTablasAnidadas.Models.Orders>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h3>Lista de Ordenes</h3>
+
+<table class="table table-bordered" id="orden">
+    <thead>
+        <tr>
+            <th></th>
+            <th>OrderId</th>
+            <th>OrderDate</th>
+            <th>ShippedDate</th>
+            <th>ShipCity</th>
+            <th>ShipName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="text-align:center"> <img src="~/Content/img/add.png" style="cursor:pointer" orderId="@item.OrderID" /></td>
+                <td>@item.OrderID</td>
+                <td>@item.OrderDate</td>
+                <td>@item.ShippedDate</td>
+                <td>@item.ShipCity</td>
+                <td>@item.ShipName</td>
+            </tr>
+            <tr id="fila-@item.OrderID" style="display:none">
+                <td></td>
+                <td colspan="5">
+                    @Html.Action("Detalle", new { ordenId = item.OrderID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    
+    <script type="text/javascript">
+        $(function () {
+            $("#orden tbody img").click(function () {
+                var orderId = $(this).attr("orderId");
+                var fila = $("#fila-" + orderId);
+                if (fila.css("display") == "none") {
+                    fila.css("display", "table-row");
+                    $(this).attr("src", "@Url.Content("~/Content/img/remove.png")");
+                } else
+                {
+                    fila.css("display", "none");
+                    $(this).attr("src", "@Url.Content("~/Content/img/add.png")");
+                }
+            });
+        });
+    </script>
+    }
